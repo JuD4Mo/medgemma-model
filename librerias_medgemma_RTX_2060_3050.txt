@@ -1,0 +1,48 @@
+# ============================================================
+# LIBRERIAS - MEDGEMMA RADIOLOGIA - NVIDIA RTX 2060 / RTX 3050
+# ============================================================
+#
+# Ambas GPU soportan CUDA 12.x:
+#   - RTX 2060  : Turing,  compute capability 7.5  (sobremesa, 6 GB VRAM)
+#   - RTX 3050  : Ampere, compute capability 8.6  (portátil 4 GB / sobremesa 8 GB)
+#
+# Nota: este laboratorio ejecuta la inferencia por Gemini API,
+# por lo que la GPU solo se necesita para que no fallen los
+# imports de PyTorch/transformers (MedGemma local no se carga).
+
+# 1. Crear y activar entorno (si todavía no existe)
+# conda create -n medgemma_radio python=3.11 -y
+# conda activate medgemma_radio
+
+# 2. Actualizar herramientas de instalación
+python -m pip install --upgrade pip setuptools wheel
+
+# 3. PyTorch para RTX 2060 / RTX 3050 - CUDA 12.4
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+
+# 4. MedGemma / Hugging Face
+pip install transformers accelerate sentencepiece safetensors huggingface-hub tokenizers
+
+# 5. Procesamiento de imágenes y datos
+pip install pillow numpy pandas matplotlib scikit-learn scipy opencv-python
+
+# 6. Gemini y variables de entorno
+pip install google-genai python-dotenv
+
+# 7. Audio
+pip install soundfile librosa
+
+# 8. Interfaz y utilidades
+pip install gradio tqdm requests protobuf packaging psutil einops
+
+# 9. Jupyter
+pip install jupyter notebook ipykernel ipywidgets
+
+# 10. Cuantización - recomendable para MedGemma con VRAM limitada
+pip install bitsandbytes
+
+# 11. Registrar kernel
+python -m ipykernel install --user --name medgemma_radio --display-name "Python (MedGemma Radiologia)"
+
+# VERIFICACION DE GPU
+python -c "import torch; print('PyTorch:', torch.__version__); print('CUDA:', torch.version.cuda); print('CUDA disponible:', torch.cuda.is_available()); print('GPU:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'GPU NO DETECTADA')"
