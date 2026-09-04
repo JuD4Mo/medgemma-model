@@ -1,0 +1,40 @@
+# ============================================================
+# Dependencias del entorno `medgemma-t5` (llama.cpp + GGUF)
+# ============================================================
+# Entorno de ejecucion del notebook radiologia_medgemma_llamacpp.ipynb.
+# La inferencia usa llama-server (llama.cpp) por HTTP en 127.0.0.1:8081;
+# este entorno provee las librerias del notebook (pandas, PIL, etc.).
+#
+# Instalacion basica:
+#   conda create -n medgemma-t5 python=3.10 -y
+#   conda activate medgemma-t5
+#   pip install -r requirements_llamacpp.txt
+#   conda install -n medgemma-t5 -c nvidia cuda-toolkit -y   # nvcc (compilar llama.cpp)
+#
+# El binario llama-server se compila desde el repositorio llama.cpp
+# (ver README.md); NO se usa la rueda precompilada de llama-cpp-python
+# porque requiere AVX512 que esta CPU no soporta.
+
+# --- Runtime del notebook ---
+pandas
+numpy
+pillow
+psutil
+python-dotenv
+huggingface_hub>=0.23.0
+ipykernel
+nbformat
+nbclient
+
+# --- Herramientas ---
+cmake          # compilacion de llama.cpp
+git
+
+# --- Para el notebook de evidencia (radiologia_medgemma_1.5-4b-it.ipynb) ---
+# Opcional: solo se necesitan si se quiere re-ejecutar el experimento
+# de Transformers 5.x (resultado D/B documentado). La solucion llama.cpp
+# NO los requiere.
+# transformers==5.16.1
+# accelerate==1.14.0
+# bitsandbytes==0.50.2
+# torch==2.6.0+cu124   (instalar con: pip install torch --index-url https://download.pytorch.org/whl/cu124)
