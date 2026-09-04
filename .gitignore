@@ -54,6 +54,7 @@ images_*/
 # ============================================================
 outputs/
 modelos_locales/
+modelos_gguf/
 offload_medgemma/
 configuracion/
 
